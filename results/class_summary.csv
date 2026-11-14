@@ -1,0 +1,6 @@
+label,rows,sessions,days,block_period,poll_s,class,hours
+0,15301,8,3,15.0,2.0,Normal,8.88
+1,3416,2,2,5.0,2.0,Eclipse,2.0
+2,3531,6,2,15.0,2.0,Flooding,2.06
+3,3541,1,1,5.0,2.033,Sybil,2.0
+4,3683,18,2,15.0,3.0,RPC_Abuse,3.68

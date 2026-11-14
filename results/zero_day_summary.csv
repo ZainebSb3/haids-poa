@@ -1,0 +1,11 @@
+,,LightGBM_unseen,LightGBM_unseen,IsolationForest,IsolationForest,Autoencoder,Autoencoder
+,,mean,std,mean,std,mean,std
+features,held_out,,,,,,
+all,Eclipse,0.49,0.516,0.788,0.125,0.999,0.001
+all,Flooding,0.004,0.005,0.499,0.525,0.969,0.032
+all,RPC_Abuse,0.088,0.009,0.516,0.511,0.876,0.191
+all,Sybil,0.303,0.332,0.705,0.329,0.998,0.003
+node,Eclipse,0.949,0.013,0.909,0.112,0.876,0.162
+node,Flooding,0.034,0.036,0.5,0.527,0.782,0.384
+node,RPC_Abuse,0.059,0.024,0.503,0.524,0.664,0.386
+node,Sybil,0.977,0.024,0.578,0.446,0.947,0.081

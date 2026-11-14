@@ -1,0 +1,4 @@
+fold,single_macro_f1,two_macro_f1,single_bin_f1,two_bin_f1,typing_acc_given_alarm
+A->B,0.796,0.938,0.744,0.97,0.989
+B->A,0.859,0.846,0.983,0.968,0.88
+mean,0.827,0.892,0.864,0.969,0.935
