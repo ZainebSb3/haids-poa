@@ -72,5 +72,5 @@ for fold, train, test in splits(df, "cross_day"):
 
 ## License
 
-To be chosen by the authors before the repository is made public
-(a common choice is MIT for the code and CC BY 4.0 for the data).
+* **Code** (everything outside `data/raw/`): MIT, see `LICENSE`.
+* **Data** (`data/raw/`): CC BY 4.0, see `data/LICENSE`. Please cite the paper when you use it.

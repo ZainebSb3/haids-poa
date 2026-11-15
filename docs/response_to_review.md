@@ -34,5 +34,4 @@
 2. Public repository URL (planned: https://github.com/ZainebSb3/haids-poa).
 3. Confirm the 5-second block period on 8-9 April (read from the data).
 4. Port the LaTeX to the IEEE Access template (the draft uses IEEEtran).
-5. Choose licences for code and data.
 6. Confirm the supervisor's affiliation line and the final author order with all co-authors.
