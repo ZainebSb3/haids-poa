@@ -30,7 +30,7 @@
 
 ## Open items before submission (marked in red in the PDF)
 
-1. CPU, RAM and network adapter of machines A, B and C.
+1. Wi-Fi adapter of machine B (CPU and RAM of all three machines are now in Section III-B).
 2. Which nodes ran the background transaction generator (B1/B2 as the draft says, or C1/C3).
 3. Collector location and version used for the Sybil session on 9 April.
 4. Public repository URL.
