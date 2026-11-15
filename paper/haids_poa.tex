@@ -22,9 +22,9 @@
 
 \title{HAIDS-PoA: A Labeled Node-Telemetry Intrusion Dataset for Ethereum Proof-of-Authority Networks and a Session-Aware Benchmark}
 
-\author{Mariem~Ben~Abdallah, Zaineb~Sboui, and Eya~Hadj~Abdallah%
-\thanks{The authors are with the Department of Computer Engineering \& Applied Mathematics, National Engineering School of Sfax (ENIS), Sfax, Tunisia.}%
-\thanks{Dataset, code and all result files: \tbc{public repository URL}.}}
+\author{Zaineb~Sboui, Mariem~Ben~Abdallah, Eya~Hadj~Abdallah, and Tarek~Frikha%
+\thanks{The authors are with the Department of Computer Engineering \& Applied Mathematics, National Engineering School of Sfax (ENIS), Sfax, Tunisia. Z.~Sboui, M.~Ben~Abdallah and E.~Hadj~Abdallah contributed equally to this work.}%
+\thanks{Dataset, code and all result files: \tbc{\url{https://github.com/ZainebSb3/haids-poa} once public}.}}
 
 \maketitle
 
@@ -106,7 +106,7 @@ Sommer and Paxson~\cite{sommer2010} argued that intrusion detection differs from
 Clique is the PoA consensus protocol specified in EIP-225~\cite{eip225}: a fixed set of authorised validators seals blocks at a configured period. The testbed uses a single authorised sealer, so block production is sequential and in-turn/out-of-turn sealing is not exercised. This minimal configuration gives a stable baseline against which network- and system-level deviations can be observed; its consequences for generality are discussed in Section~\ref{sec:threats}. Nodes communicate over DevP2P with RLPx-encrypted sessions and discover peers through a Kademlia-like table. Each node exposes JSON-RPC over HTTP, which is both the telemetry source and the attack surface of the RPC Abuse scenario.
 
 \subsection{Topology}
-The platform comprises seven Ethereum nodes on three physical machines connected through an IEEE~802.11 WiFi LAN isolated from the Internet (Fig.~\ref{fig:topology}, Table~\ref{tab:nodes}). All nodes run Geth v1.13.15-stable on Windows~11 with chain ID~1337, and discovery uses a dedicated bootnode whose enode URI is statically configured. Machine~A hosts the sealer A1, which is the victim and the only measurement point, and an honest peer A2. Machine~B hosts two honest nodes that generate transactions. Machine~C hosts the attacker nodes. Attacker nodes are restarted between scenarios to clear their peer tables. The machines are laptops: Machine~A has an Intel Core i7-12700H (14 cores, 20 threads) with 24~GB of RAM and a MediaTek MT7902 Wi-Fi~6E adapter; Machine~B an Intel Core i5-10300H (4 cores, 8 threads) with 16~GB of RAM \tbc{Wi-Fi adapter of Machine~B}; and Machine~C an Intel Core i7-13620H (10 cores, 16 threads) with 16~GB of RAM and a Realtek RTL8852BE Wi-Fi~6 adapter.
+The platform comprises seven Ethereum nodes on three physical machines connected through an IEEE~802.11 WiFi LAN isolated from the Internet (Fig.~\ref{fig:topology}, Table~\ref{tab:nodes}). All nodes run Geth v1.13.15-stable on Windows~11 with chain ID~1337, and discovery uses a dedicated bootnode whose enode URI is statically configured. Machine~A hosts the sealer A1, which is the victim and the only measurement point, and an honest peer A2. Machine~B hosts two honest nodes that generate transaction load. Machine~C hosts the attacker nodes. Attacker nodes are restarted between scenarios to clear their peer tables. The machines are laptops: Machine~A has an Intel Core i7-12700H (14 cores, 20 threads) with 24~GB of RAM and a MediaTek MT7902 Wi-Fi~6E adapter; Machine~B an Intel Core i5-10300H (4 cores, 8 threads) with 16~GB of RAM \tbc{Wi-Fi adapter of Machine~B}; and Machine~C an Intel Core i7-13620H (10 cores, 16 threads) with 16~GB of RAM and a Realtek RTL8852BE Wi-Fi~6 adapter.
 
 \begin{figure}[t]
 \centering
@@ -139,7 +139,7 @@ Mach. & Node(s) & Role & Scenarios \\
 \midrule
 A & A1 & Sealer, victim, collector & Target of all attacks \\
 A & A2 & Honest peer & Benign reference \\
-B & B1, B2 & Honest nodes & Background load, Flooding \\
+B & B1, B2 & Honest nodes & Transaction load, Flooding \\
 C & C1--C3, spawned nodes & Attacker nodes & Sybil, Eclipse, RPC Abuse \\
 \bottomrule
 \end{tabular}
@@ -174,11 +174,11 @@ One scenario is active per session, so labels are assigned at session level with
 
 \emph{Sybil}~\cite{douceur2002}. Machine~C runs the base nodes C1--C3 and five additional Geth identities that are repeatedly connected to and disconnected from A1, inflating and churning the peer table, together with request load from the attacker host. One 120-minute session was recorded.
 
-\emph{Transaction Flooding}~\cite{baqer2016,pacheco2023}. The honest nodes B1 and B2 switch from their background rate of about 100 transactions per minute to multi-threaded submission at 3{,}000--6{,}000 transactions per minute, with elevated gas price to ensure mempool retention. Six sessions on two days were recorded.
+\emph{Transaction Flooding}~\cite{baqer2016,pacheco2023}. The nodes of Machine~B submit transactions from multiple threads at 3{,}000--6{,}000 transactions per minute, against a background rate of about 100 per minute, with elevated gas price to ensure mempool retention. Six sessions on two days were recorded.
 
 \emph{RPC Abuse}~\cite{saad2020}. A script on Machine~C runs 230 concurrent threads that continuously submit computationally expensive JSON-RPC calls (\code{eth\_getLogs} over a large block range, \code{eth\_call} with an oversized payload, \code{eth\_getStorageAt}) to A1. Eighteen sessions on two days were recorded; several are short because the collector's own RPC calls time out under load.
 
-\emph{Normal}. A1 seals blocks while honest nodes submit background transactions and periodic contract deployments. Eight sessions on three days were recorded. \tbc{which nodes ran the background transaction generator.}
+\emph{Normal}. A1 seals blocks while honest nodes submit background transactions and periodic contract deployments. Eight sessions on three days were recorded. The set of nodes that generated the background transactions varied between sessions and was not logged.
 
 Labels are encoded as 0~=~Normal, 1~=~Eclipse, 2~=~Flooding, 3~=~Sybil, 4~=~RPC Abuse. Records at the onset of an attack session carry the attack label although the attack may not yet have reached its steady state.
 
@@ -212,7 +212,7 @@ Three recording conditions are not constant across classes. They are visible in 
 
 \emph{Block period.} The sessions of 8--9~April (Eclipse and Sybil) ran with a 5-second block period; the chain was then re-initialised and all later sessions (Normal, Flooding, RPC Abuse) ran with 15~seconds. The block period, the block height and the inter-block time therefore identify the chain instance and are excluded from the model inputs. Quantities that depend on block production (\code{gas\_used\_last\_block} and, to a lesser degree, \code{pending\_tx\_count}) remain partly confounded with the block period for Eclipse and Sybil.
 
-\emph{Sybil session.} Sybil was recorded in a single session, with millisecond-resolution timestamps and a median probe latency of 2~ms, against 33--74~ms in every Normal, Eclipse and Flooding session. This points to a different collector configuration for that session. \tbc{collector location and version used on 9~April.} Sybil results cannot be validated on an unseen day and should be read as an upper bound.
+\emph{Sybil session.} Sybil was recorded in a single session, with millisecond-resolution timestamps and a median probe latency of 2~ms, against 33--74~ms in every Normal, Eclipse and Flooding session. The collector ran on Machine~A as in every other session, and the cause of this difference was not established. Sybil results cannot be validated on an unseen day and should be read as an upper bound.
 
 \emph{Polling interval.} Under RPC Abuse the collector's own calls are delayed and the median interval rises to 3~s. The interval is a consequence of the attack, but it also separates the Sybil session (2.03~s) from the others (2.00~s), so it is not used as a feature.
 
@@ -560,7 +560,7 @@ All attacks were executed inside a private testnet on a WiFi LAN isolated from t
 \section{Limitations and Threats to Validity}\label{sec:threats}
 \emph{Session confounding is reduced, not eliminated.} Four of five classes were recorded on two or three days, which is the minimum for a cross-day test. Each side of the cross-day protocol contains one to three days per class, so day-to-day variability is estimated from few days, as the difference between the two directions shows.
 
-\emph{Sybil.} Sybil has one session, recorded with a different collector configuration (Section~\ref{sec:conditions}). Its cross-day figures are within-session figures and its RPC-latency signature should not be interpreted.
+\emph{Sybil.} Sybil has one session, whose timestamps and probe latency differ from all others for a reason that was not established (Section~\ref{sec:conditions}). Its cross-day figures are within-session figures and its RPC-latency signature should not be interpreted.
 
 \emph{Block period.} Eclipse and Sybil were recorded with a 5-second block period and the other classes with 15~seconds. Chain-layer features are partly confounded for these two classes. The P2P + RPC result (0.961) is free of this effect for Eclipse.
 

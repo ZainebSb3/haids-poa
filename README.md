@@ -67,7 +67,7 @@ for fold, train, test in splits(df, "cross_day"):
 
 ## Citation
 
-    M. Ben Abdallah, Z. Sboui, and E. Hadj Abdallah, "HAIDS-PoA: A Labeled Node-Telemetry
+    Z. Sboui, M. Ben Abdallah, E. Hadj Abdallah, and T. Frikha, "HAIDS-PoA: A Labeled Node-Telemetry
     Intrusion Dataset for Ethereum Proof-of-Authority Networks and a Session-Aware Benchmark," 2026.
 
 ## License

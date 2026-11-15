@@ -30,11 +30,9 @@
 
 ## Open items before submission (marked in red in the PDF)
 
-1. Wi-Fi adapter of machine B (CPU and RAM of all three machines are now in Section III-B).
-2. Which nodes ran the background transaction generator (B1/B2 as the draft says, or C1/C3).
-3. Collector location and version used for the Sybil session on 9 April.
-4. Public repository URL.
-5. Confirm the 5-second block period on 8-9 April (read from the data).
-6. Author order and whether the supervisor is a co-author.
-7. Port the LaTeX to the IEEE Access template (the draft uses IEEEtran).
-8. Choose licences for code and data.
+1. Wi-Fi adapter of machine B, or confirmation that it was wired in April.
+2. Public repository URL (planned: https://github.com/ZainebSb3/haids-poa).
+3. Confirm the 5-second block period on 8-9 April (read from the data).
+4. Port the LaTeX to the IEEE Access template (the draft uses IEEEtran).
+5. Choose licences for code and data.
+6. Confirm the supervisor's affiliation line and the final author order with all co-authors.

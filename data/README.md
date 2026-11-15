@@ -31,8 +31,8 @@ Other: `label`, `attack_type`, `timestamp`.
   features.** Eclipse and Sybil were recorded with a 5 s block period, the other classes with
   15 s, on a re-initialised chain. These columns identify the chain instance, not the attack.
 * `blocks_behind`, `tx_invalid_total`, `tx_invalid_delta` are zero in every record.
-* **Sybil has a single session**, recorded with a different collector configuration
-  (millisecond timestamps, about 2 ms probe latency). It cannot be tested on an unseen day.
+* **Sybil has a single session** whose timestamps (millisecond resolution) and probe latency
+  (about 2 ms) differ from all other sessions, for a reason that was not established. It cannot be tested on an unseen day.
 * **Split by session or by day, never by row.** A random split gives a macro-F1 of 1.00 that
   drops to 0.80-0.87 on unseen days.
 * `net_connections` and the other operating-system network counters fingerprint the recording
