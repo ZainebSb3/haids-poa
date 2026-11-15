@@ -28,9 +28,9 @@
   RPC Abuse uses 230 threads everywhere; block period 5 s for Eclipse and Sybil sessions;
   placeholder references [21]-[23] removed; BNaT and TON_IoT references corrected.
 
-## Open items before submission (marked in red in the PDF)
+## Open items before submission
 
-1. Public repository URL (planned: https://github.com/ZainebSb3/haids-poa).
+1. Make the repository public (https://github.com/ZainebSb3/haids-poa; the paper already links to it).
 2. Confirm the 5-second block period on 8-9 April (read from the data).
 3. Port the LaTeX to the IEEE Access template (the draft uses IEEEtran).
 4. Confirm the supervisor's affiliation line and the final author order with all co-authors.
